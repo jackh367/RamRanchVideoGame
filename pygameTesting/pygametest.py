@@ -1,5 +1,3 @@
-#find a way to make the ram img flip in the direction he's moving
-#i have left an image of the ram facing in the right direction in the github repository
 
 # Import and initialize pygame module.
 import pygame
@@ -7,8 +5,7 @@ pygame.init()
 
 # Set up game window.
 screen = pygame.display.set_mode((1600,700))
-pygame.display.set_caption("Ram Ranch: The Video Game alpha")
-
+pygame.display.set_caption("Ram Ranch: The Video Game Alpha")
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
