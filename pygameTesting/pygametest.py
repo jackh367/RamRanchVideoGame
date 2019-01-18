@@ -1,3 +1,6 @@
+#find a way to make the ram img flip in the way he's moving
+
+
 # Import and initialize pygame module.
 import pygame
 pygame.init()
