@@ -1,5 +1,5 @@
-#find a way to make the ram img flip in the way he's moving
-
+#find a way to make the ram img flip in the direction he's moving
+#i have left an image of the ram facing in the right direction in the github repository
 
 # Import and initialize pygame module.
 import pygame
