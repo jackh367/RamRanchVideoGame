@@ -23,6 +23,16 @@ ramwidth = 40
 ramheight = 60
 ramvel = 5.5
 
+# This method detects if two rectangles are overlapping.
+# Implements the algorithm found at https://www.geeksforgeeks.org/find-two-rectangles-overlap/
+# INPUTS:
+# rect1 -> a tuple containing the upper left x coordinate, upper left y coordinate,
+#          width, and height of a rectangle.
+# rect2 -> a tuple containing the upper left x coordinate, upper left y coordinate,
+#          width, and height of a second rectangle.
+# OUTPUTS:
+# returns true if the rectangles overlap and false if they don't.
+# ---------------------------------------------------------------------------------
 def collision(rect1, rect2):
     # Get the upper left coordinate of the first rectangle.
     l1 = (rect1[0], rect1[1])
@@ -84,10 +94,10 @@ while run:
     # Get user input and move the ram.
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and ramx > ramvel:
-        ramimg = ramleft
+        ramimg = ramleft # Set the ram image to the left one.
         ramx -= ramvel
     if keys[pygame.K_RIGHT] and ramx < 1600 - ramwidth - ramvel:
-        ramimg = ramright
+        ramimg = ramright # Set the ram image to the right one.
         ramx += ramvel
     if keys[pygame.K_UP] and ramy > ramvel:
         ramy -= ramvel
@@ -97,13 +107,20 @@ while run:
 
     #where cowboy follows the ram
     if ramx > cowboyx:
+        # Set the appropriate cowboy image here.
         cowboyx = cowboyx + cowboyvel
     if ramy > cowboyy:
         cowboyy = cowboyy + cowboyvel
     if ramx < cowboyx:
-            cowboyx = cowboyx - cowboyvel
+        # Set the appropriate cowboy image here.
+        cowboyx = cowboyx - cowboyvel
     if ramy < cowboyy:
             cowboyy = cowboyy - cowboyvel
+
+    cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
+    ramrect = (ramx, ramy, ramwidth, ramheight)
+    if collision(cowboyrect, ramrect):
+        print("Collision detected!")
 
 
 
