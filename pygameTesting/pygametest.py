@@ -75,7 +75,7 @@ cowboyx = 0
 cowboyy = 0
 cowboywidth = 180
 cowboyheight = 194
-cowboyvel = 2.5
+cowboyvel = 1
 
 
 # Start game loop.
@@ -107,12 +107,12 @@ while run:
 
     #where cowboy follows the ram
     if ramx > cowboyx:
-        # Set the appropriate cowboy image here.
+        cowboyimg = cowboyright
         cowboyx = cowboyx + cowboyvel
     if ramy > cowboyy:
         cowboyy = cowboyy + cowboyvel
     if ramx < cowboyx:
-        # Set the appropriate cowboy image here.
+        cowboyimg = cowboyleft
         cowboyx = cowboyx - cowboyvel
     if ramy < cowboyy:
             cowboyy = cowboyy - cowboyvel
@@ -120,7 +120,7 @@ while run:
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
-        print("Collision detected!")
+        pygame.QUIT()
 
 
 
