@@ -23,6 +23,33 @@ ramwidth = 40
 ramheight = 60
 ramvel = 5.5
 
+def collision(rect1, rect2):
+    # Get the upper left coordinate of the first rectangle.
+    l1 = (rect1[0], rect1[1])
+
+    # Get the lower right coordinate of the first rectangle.
+    r1 = (rect1[0] + rect1[2], rect1[1] + rect1[3])
+
+    # Get the upper left coordinate of the second triangle.
+    l2 = (rect2[0], rect2[1])
+
+    # Get the lower right coordinate of the second triangle.
+    r2 = (rect2[0] + rect2[2], rect2[1] + rect2[3])
+
+    # If the rectangles do not overlap in the x-dimension, then return false.
+    if l1[0] > r2[0] or l2[0] > r1[0]:
+        return False
+
+    # If the rectangles do not overlap in the y-dimension, then return false.
+    if l1[1] > r2[1] or l2[1] > r1[1]:
+        return False
+
+    # If neither of the above if-statements are true, then the rectangles must
+    # overlap in some way, therefore the function returns True.
+    return True
+
+
+
 # Setting up the ranch.
 ranchimg = pygame.image.load("ranch.jpg")
 ranchx = 0
@@ -39,6 +66,7 @@ cowboyy = 0
 cowboywidth = 180
 cowboyheight = 194
 cowboyvel = 2.5
+
 
 # Start game loop.
 run = True
