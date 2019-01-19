@@ -1,4 +1,3 @@
-
 # Import and initialize pygame module.
 import pygame
 pygame.init()
@@ -16,6 +15,7 @@ pygame.event.wait()
 # Setting up ram.
 ramleft = pygame.image.load("ram.png")
 ramright = pygame.image.load("ramflipped.png")
+ramimg = ramright
 ramx = 50
 ramy = 425
 ramwidth = 40
@@ -43,8 +43,10 @@ while run:
     # Get user input and move the ram.
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and ramx > ramvel:
+        ramimg = ramleft
         ramx -= ramvel
     if keys[pygame.K_RIGHT] and ramx < 1600 - ramwidth - ramvel:
+        ramimg = ramright
         ramx += ramvel
     if keys[pygame.K_UP] and ramy > ramvel:
         ramy -= ramvel
@@ -54,7 +56,7 @@ while run:
     # Render the scene.
     screen.fill((0, 0, 0))
     screen.blit(ranchimg, (ranchx, ranchy))
-    screen.blit(ramleft,ramright (ramx, ramy))
+    screen.blit(ramimg, (ramx, ramy))
 
     pygame.display.update()
 
