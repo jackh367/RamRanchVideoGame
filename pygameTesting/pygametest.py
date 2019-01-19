@@ -64,6 +64,22 @@ while run:
     if keys[pygame.K_DOWN] and ramy < 800 - ramheight - ramvel:
         ramy += ramvel
 
+    #where cowboy follows the ram
+        if ramx > cowboyx:
+            cowboyvel += cowboyx
+        if ramy > cowboyy:
+            cowboyvel -= cowboyy
+        if ramx > cowboyx:
+            cowboyvel += cowboyx
+        if ramx > cowboyy:
+            cowboyvel -= cowboyy
+
+
+
+
+
+
+
     # Render the scene.
     screen.fill((0, 0, 0))
     screen.blit(ranchimg, (ranchx, ranchy))
