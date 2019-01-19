@@ -38,7 +38,7 @@ cowboyx = 0
 cowboyy = 0
 cowboywidth = 180
 cowboyheight = 194
-cowboyvel = 4.9
+cowboyvel = 1
 
 # Start game loop.
 run = True
@@ -69,14 +69,14 @@ while run:
 
     #where cowboy follows the ram
     if ramx > cowboyx:
-        # Add the velocity to the position.
         cowboyx = cowboyx + cowboyvel
     if ramy > cowboyy:
-        cowboyvel -= cowboyy
-    if ramx > cowboyx:
-        cowboyvel += cowboyx
-    if ramx > cowboyy:
-        cowboyvel -= cowboyy
+        cowboyy = cowboyy + cowboyvel
+    if ramx < cowboyx:
+            cowboyx = cowboyx - cowboyvel
+    if ramy < cowboyy:
+            cowboyy = cowboyy - cowboyvel
+
 
 
     # Render the scene.
