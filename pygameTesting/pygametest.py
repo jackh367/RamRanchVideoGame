@@ -3,14 +3,14 @@ import pygame
 pygame.init()
 
 # Set up game window.
-screen = pygame.display.set_mode((1600,800))
-#screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN) for fullscreen
+screen = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ram Ranch: The Video Game Alpha")
+
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
 pygame.mixer.music.load(file)
-pygame.mixer.music.play()
+# pygame.mixer.music.play()
 pygame.event.wait()
 
 # Setting up ram.
@@ -31,13 +31,14 @@ ranchwidth = 1920
 ranchheight = 734
 
 # setting up enemies
-#cowboyleft = pygame.image.load("cowboyleft.png")
-#cowboyright = pygame.image.load("cowboyright.png")
-#cowboyx = 0
-#cowboyy = 0
-#cowboywidth = 180
-#cowboyheight = 194
-#cowboyvel = 4.9
+cowboyleft = pygame.image.load("cowboyleft.png")
+cowboyright = pygame.image.load("cowboyright.png")
+cowboyimg = cowboyright
+cowboyx = 0
+cowboyy = 0
+cowboywidth = 180
+cowboyheight = 194
+cowboyvel = 4.9
 
 # Start game loop.
 run = True
@@ -67,7 +68,7 @@ while run:
     screen.fill((0, 0, 0))
     screen.blit(ranchimg, (ranchx, ranchy))
     screen.blit(ramimg, (ramx, ramy))
-    #screen.blit(cowboyleft, cowboyright)
+    screen.blit(cowboyimg, (cowboyx, cowboyy))
     pygame.display.update()
 
 pygame.quit()
