@@ -10,7 +10,7 @@ pygame.display.set_caption("Ram Ranch: The Video Game Alpha")
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
 pygame.mixer.music.load(file)
-# pygame.mixer.music.play()
+#pygame.mixer.music.play()
 pygame.event.wait()
 
 # Setting up ram.
