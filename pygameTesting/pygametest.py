@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 # Set up game window.
-screen = pygame.display.set_mode((1600,700))
+screen = pygame.display.set_mode((1600,800))
 pygame.display.set_caption("Ram Ranch: The Video Game Alpha")
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
@@ -14,7 +14,8 @@ pygame.mixer.music.play()
 pygame.event.wait()
 
 # Setting up ram.
-ramimg = pygame.image.load("ram.png")
+ramleft = pygame.image.load("ram.png")
+ramright = pygame.image.load("ramflipped.png")
 ramx = 50
 ramy = 425
 ramwidth = 40
@@ -53,7 +54,7 @@ while run:
     # Render the scene.
     screen.fill((0, 0, 0))
     screen.blit(ranchimg, (ranchx, ranchy))
-    screen.blit(ramimg, (ramx, ramy))
+    screen.blit(ramleft,ramright (ramx, ramy))
 
     pygame.display.update()
 
