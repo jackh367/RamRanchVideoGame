@@ -4,7 +4,7 @@ pygame.init()
 
 # Set up game window.
 screen = pygame.display.set_mode((1280,720))
-pygame.display.set_caption("Ram Ranch: The Video Game Alpha")
+pygame.display.set_caption("Ram Ranch: The Video Game")
 
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
@@ -21,7 +21,7 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 5
+ramvel = 5.5
 
 # Setting up the ranch.
 ranchimg = pygame.image.load("ranch.jpg")
@@ -38,7 +38,7 @@ cowboyx = 0
 cowboyy = 0
 cowboywidth = 180
 cowboyheight = 194
-cowboyvel = 1
+cowboyvel = 2.5
 
 # Start game loop.
 run = True
