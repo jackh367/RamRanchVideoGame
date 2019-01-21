@@ -1,5 +1,6 @@
 # Import and initialize pygame module.
 import pygame
+import webbrowser
 pygame.init()
 
 # Set up game window.
@@ -21,7 +22,7 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 5.5
+ramvel = 5
 
 # This method detects if two rectangles are overlapping.
 # Implements the algorithm found at https://www.geeksforgeeks.org/find-two-rectangles-overlap/
@@ -58,8 +59,6 @@ def collision(rect1, rect2):
     # overlap in some way, therefore the function returns True.
     return True
 
-
-
 # Setting up the ranch.
 ranchimg = pygame.image.load("ranch.jpg")
 ranchx = 0
@@ -76,6 +75,12 @@ cowboyy = 0
 cowboywidth = 180
 cowboyheight = 194
 cowboyvel = 1
+
+# setting up grass that ram runs around and eats( not started )
+
+
+
+
 
 
 # Start game loop.
@@ -120,7 +125,8 @@ while run:
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
-        pygame.QUIT()
+        #webbrowser.open('')
+        pygame.quit()
 
 
 
