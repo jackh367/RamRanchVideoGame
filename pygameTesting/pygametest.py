@@ -5,13 +5,13 @@ pygame.init()
 
 # Set up game window.
 screen = pygame.display.set_mode((1280,720))
-pygame.display.set_caption("Ram Ranch: The Video Game")
+pygame.display.set_caption("Ram Ranch")
 
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
 pygame.mixer.music.load(file)
-pygame.mixer.music.play()
+#pygame.mixer.music.play()
 pygame.event.wait()
 #munch sound effect when ram eats grass
 def munch():
@@ -35,17 +35,23 @@ ramvel = 20
 
 # this variable keeps track of the ram's grass eaten
 score = 0
-
+#sets up harder version of the game
 def hardmode():
     global cowboyvel
     global ramvel
-    file = 'hardmodemusic'
+    #file = 'hardmodemusic.mp3'
     pygame.mixer.init()
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     pygame.event.wait()
     cowboyvel = 45
     ramvel = 60
+#sets up probably impossible version of the game if you even make it this far
+def impossiblemode():
+    global cowboyvel
+    global ramvel
+    cowboyvel = 999
+    ramvel = 999
 
 
 # This method detects if two rectangles are overlapping.
@@ -65,16 +71,16 @@ def collision(rect1, rect2, rect3):
     # Get the lower right coordinate of the first rectangle.
     r1 = (rect1[0] + rect1[2], rect1[1] + rect1[3])
 
-    # Get the upper left coordinate of the second triangle.
+    # Get the upper left coordinate of the second rectangle.
     l2 = (rect2[0], rect2[1])
 
-    # Get the lower right coordinate of the second triangle.
+    # Get the lower right coordinate of the second rectangle.
     r2 = (rect2[0] + rect2[2], rect2[1] + rect2[3])
 
-    # Get the upper left coordinate of the third triangle.
+    # Get the upper left coordinate of the third rectangle.
     l3 = (rect3[0], rect3[1])
 
-    # Get the lower right coordinate of the third triangle.
+    # Get the lower right coordinate of the third rectangle.
     r3 = (rect3[0] + rect3[2], rect3[1] + rect3[3])
 
     # If the rectangles do not overlap in the x-dimension, then return false.
@@ -178,13 +184,8 @@ while run:
     if score == 50:
         hardmode()
 
-
-
-
-
-
-
-
+    if score == 100:
+        impossiblemode()
 
     # Render the scene.
     screen.fill((0, 0, 0))
