@@ -15,8 +15,7 @@ pygame.mixer.music.load(file)
 pygame.event.wait()
 #munch sound effect when ram eats grass
 def munch():
-    file = 'munch.mp3'
-    effect = pygame.mixer.Sound('munch.mp3')
+    effect = pygame.mixer.Sound('munch.wav')
     effect.play()
 
 
