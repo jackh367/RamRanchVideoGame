@@ -62,7 +62,7 @@ def impossiblemode():
 # OUTPUTS:
 # returns true if the rectangles overlap and false if they don't.
 # ---------------------------------------------------------------------------------
-def collision(rect1, rect2, rect3):
+def collision(rect1, rect2,):
     # Get the upper left coordinate of the first rectangle.
     l1 = (rect1[0], rect1[1])
 
@@ -75,18 +75,12 @@ def collision(rect1, rect2, rect3):
     # Get the lower right coordinate of the second rectangle.
     r2 = (rect2[0] + rect2[2], rect2[1] + rect2[3])
 
-    # Get the upper left coordinate of the third rectangle.
-    l3 = (rect3[0], rect3[1])
-
-    # Get the lower right coordinate of the third rectangle.
-    r3 = (rect3[0] + rect3[2], rect3[1] + rect3[3])
-
     # If the rectangles do not overlap in the x-dimension, then return false.
-    if l1[0] > r2[0] or l2[0] > r1[0] or l3[0] > r3[0]:
+    if l1[0] > r2[0] or l2[0] > r1[0]:
         return False
 
     # If the rectangles do not overlap in the y-dimension, then return false.
-    if l1[1] > r2[1] or l2[1] > r1[1] or l3[1] > r3[1]:
+    if l1[1] > r2[1] or l2[1] > r1[1]:
         return False
 
     # If neither of the above if-statements are true, then the rectangles must
