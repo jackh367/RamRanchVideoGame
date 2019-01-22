@@ -1,23 +1,29 @@
 # Import and initialize pygame module.
 import pygame
 from random import choice
+import webbrowser
 pygame.init()
-
+pygame.font.init()
 # Set up game window.
 screen = pygame.display.set_mode((1280,720))
 pygame.display.set_caption("Ram Ranch")
-
+screenwidth = 1280
+screenheight = 720
+score = 0
+pygame.font.init()
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
+text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
 pygame.mixer.music.load(file)
-#pygame.mixer.music.play()
+pygame.mixer.music.play()
 pygame.event.wait()
+
 #munch sound effect when ram eats grass
 def munch():
     effect = pygame.mixer.Sound('munch.wav')
     effect.play()
-
 
 
 # Setting up ram.
@@ -28,10 +34,9 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 5
+ramvel = 10
 
-# this variable keeps track of the ram's grass eaten
-score = 0
+# this variable keeps track of the ram's g
 #sets up harder version of the game
 def hardmode():
     global cowboyvel
@@ -41,8 +46,8 @@ def hardmode():
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     pygame.event.wait()
-    cowboyvel = 20
-    ramvel = 190
+    cowboyvel = 50
+    ramvel = 50
 #sets up probably impossible version of the game if you even make it this far
 def impossiblemode():
     global cowboyvel
@@ -83,8 +88,8 @@ ranchwidth = 1920
 ranchheight = 734
 
 # grass x,y and img
-grassx = 100
-grassy = 100
+grassx = 700
+grassy = 500
 grassimg = pygame.image.load("grass.png")
 grasswidth = 200
 grassheight = 256
@@ -94,8 +99,8 @@ grassheight = 256
 cowboyleft = pygame.image.load("cowboyleft.png")
 cowboyright = pygame.image.load("cowboyright.png")
 cowboyimg = cowboyright
-cowboyx = 70
-cowboyy = 50
+cowboyx = 600
+cowboyy = 400
 cowboywidth = 180
 cowboyheight = 194
 cowboyvel = 1
@@ -103,11 +108,12 @@ cowboyvel = 1
 # setting up grass that ram runs around and eats
 def spawngrass():
     global grassx, grassy
-    grassx = choice(range(1000))
-    grassy = choice(range(700))
+    grassx = choice(range(1280))
+    grassy = choice(range(720))
     if collision(((grassx, grassy, grasswidth, grassheight)), ((grassx, grassy, 230, 200))):
-        grassx = choice(range(1000))
-        grassy = choice(range(700))
+        grassx = choice(range(1280))
+        grassy = choice(range(720))
+
 
 
 # Start game loop.
@@ -128,12 +134,12 @@ while run:
     if keys[pygame.K_LEFT] and ramx > ramvel:
         ramimg = ramleft # Set the ram image to the left one.
         ramx -= ramvel
-    if keys[pygame.K_RIGHT] and ramx < 1600 - ramwidth - ramvel:
+    if keys[pygame.K_RIGHT] and ramx < 1280 - ramwidth - ramvel:
         ramimg = ramright # Set the ram image to the right one.
         ramx += ramvel
     if keys[pygame.K_UP] and ramy > ramvel:
         ramy -= ramvel
-    if keys[pygame.K_DOWN] and ramy < 800 - ramheight - ramvel:
+    if keys[pygame.K_DOWN] and ramy < 720 - ramheight - ramvel:
         ramy += ramvel
 
 
@@ -161,20 +167,29 @@ while run:
         grassx = choice(range(1000))
         grassy = choice(range(700))
 
-
-
-    if score == 3:
+    if score == 10:
+        cowboyvel = 2
+    if score == 20:
+        cowboyvel = 3
+    if score == 30:
+        cowboyvel = 4
+    if score == 40:
+        cowboyvel = 5
+    if score == 50:
+        score = 0
         hardmode()
 
-    if score == 100:
-        impossiblemode()
 
+    if score == 999:
+        impossiblemode()
+    text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
     # Render the scene.
     screen.fill((0, 0, 0))
     screen.blit(ranchimg, (ranchx, ranchy))
     screen.blit(ramimg, (ramx, ramy))
     screen.blit(cowboyimg, (cowboyx, cowboyy))
     screen.blit(grassimg, (grassx, grassy))
+    screen.blit(text_surface, (20,20))
     pygame.display.update()
 
 
