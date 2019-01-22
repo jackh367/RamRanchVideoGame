@@ -6,12 +6,12 @@ pygame.init()
 pygame.font.init()
 # Set up game window.
 screen = pygame.display.set_mode((1280,720))
-pygame.display.set_caption("Ram Ranch")
+pygame.display.set_caption("Ram Ranch: The Game v1")
 screenwidth = 1280
 screenheight = 720
 score = 0
 pygame.font.init()
-myfont = pygame.font.SysFont('Comic Sans MS', 30)
+myfont = pygame.font.SysFont('Comic Sans MS', 50)
 text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
@@ -36,7 +36,7 @@ ramwidth = 40
 ramheight = 60
 ramvel = 10
 
-# this variable keeps track of the ram's g
+# this variable keeps track of the ram's grass eaten
 #sets up harder version of the game
 def hardmode():
     global cowboyvel
@@ -139,7 +139,7 @@ while run:
         ramx += ramvel
     if keys[pygame.K_UP] and ramy > ramvel:
         ramy -= ramvel
-    if keys[pygame.K_DOWN] and ramy < 720 - ramheight - ramvel:
+    if keys[pygame.K_DOWN] and ramy < 700 - ramheight - ramvel:
         ramy += ramvel
 
 
@@ -159,8 +159,8 @@ while run:
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
-        #webbrowser.open('https://fbcdn-sphotos-e-a.hubatka.cz/hphotos-ak-prn1/44530_491807354174208_665546187_n.jpg')
-        pygame.quit()
+        break
+
     if collision(ramrect, grassrect):
         score += 1
         munch()
@@ -175,11 +175,9 @@ while run:
         cowboyvel = 4
     if score == 40:
         cowboyvel = 5
-    if score == 50:
+    if score == 999:
         score = 0
         hardmode()
-
-
     if score == 999:
         impossiblemode()
     text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
