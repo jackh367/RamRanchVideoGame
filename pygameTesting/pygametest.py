@@ -28,7 +28,7 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 20
+ramvel = 5
 
 # this variable keeps track of the ram's grass eaten
 score = 0
@@ -36,31 +36,20 @@ score = 0
 def hardmode():
     global cowboyvel
     global ramvel
-    #file = 'hardmodemusic.mp3'
+    file = 'hardmodemusic.mp3'
     pygame.mixer.init()
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     pygame.event.wait()
-    cowboyvel = 45
-    ramvel = 60
+    cowboyvel = 20
+    ramvel = 190
 #sets up probably impossible version of the game if you even make it this far
 def impossiblemode():
     global cowboyvel
     global ramvel
     cowboyvel = 999
-    ramvel = 999
+    ramvel = 8
 
-
-# This method detects if two rectangles are overlapping.
-# Implements the algorithm found at https://www.geeksforgeeks.org/find-two-rectangles-overlap/
-# INPUTS:
-# rect1 -> a tuple containing the upper left x coordinate, upper left y coordinate,
-#          width, and height of a rectangle.
-# rect2 -> a tuple containing the upper left x coordinate, upper left y coordinate,
-#          width, and height of a second rectangle.
-# OUTPUTS:
-# returns true if the rectangles overlap and false if they don't.
-# ---------------------------------------------------------------------------------
 def collision(rect1, rect2,):
     # Get the upper left coordinate of the first rectangle.
     l1 = (rect1[0], rect1[1])
@@ -94,10 +83,10 @@ ranchwidth = 1920
 ranchheight = 734
 
 # grass x,y and img
-grassx = 0
-grassy = 0
+grassx = 100
+grassy = 100
 grassimg = pygame.image.load("grass.png")
-grasswidth = 191
+grasswidth = 200
 grassheight = 256
 
 
@@ -105,11 +94,11 @@ grassheight = 256
 cowboyleft = pygame.image.load("cowboyleft.png")
 cowboyright = pygame.image.load("cowboyright.png")
 cowboyimg = cowboyright
-cowboyx = 0
-cowboyy = 0
+cowboyx = 70
+cowboyy = 50
 cowboywidth = 180
 cowboyheight = 194
-cowboyvel = 3.5
+cowboyvel = 1
 
 # setting up grass that ram runs around and eats
 def spawngrass():
@@ -169,10 +158,12 @@ while run:
     if collision(ramrect, grassrect):
         score += 1
         munch()
+        grassx = choice(range(1000))
+        grassy = choice(range(700))
 
 
 
-    if score == 50:
+    if score == 3:
         hardmode()
 
     if score == 100:
