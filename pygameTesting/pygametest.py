@@ -1,7 +1,6 @@
 # Import and initialize pygame module.
 import pygame
 from random import choice
-import webbrowser
 pygame.init()
 pygame.font.init()
 # Set up game window.
@@ -12,7 +11,7 @@ screenheight = 720
 score = 0
 pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 50)
-text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
+text_surface = myfont.render('{}'.format(score), False, (255, 20, 147.))
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
@@ -25,6 +24,9 @@ def munch():
     effect = pygame.mixer.Sound('munch.wav')
     effect.play()
 
+def deathsound():
+    effect = pygame.mixer.Sound('deathsound.wav')
+    effect.play()
 
 # Setting up ram.
 ramleft = pygame.image.load("ram.png")
@@ -34,7 +36,7 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 11.9
+ramvel = 13
 
 # this variable keeps track of the ram's grass eaten
 #sets up harder version of the game
@@ -153,6 +155,7 @@ while run:
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
+        deathsound()
         break
 
     if collision(ramrect, grassrect):
