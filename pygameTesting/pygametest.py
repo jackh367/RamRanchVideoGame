@@ -5,13 +5,13 @@ pygame.init()
 pygame.font.init()
 # Set up game window.
 screen = pygame.display.set_mode((1280,720))
-pygame.display.set_caption("Ram Ranch: The Game v1")
+pygame.display.set_caption("Ram Ranch: The Video Game")
 screenwidth = 1280
 screenheight = 720
 score = 0
 pygame.font.init()
-myfont = pygame.font.SysFont('Comic Sans MS', 50)
-text_surface = myfont.render('{}'.format(score), False, (255, 20, 147.))
+myfont = pygame.font.SysFont('Comic Sans MS', 60)
+text_surface = myfont.render('{}'.format(score), False, (255, 225, 255.))
 # Setting up sounds.
 file = 'Ram Ranch.mp3'
 pygame.mixer.init()
@@ -22,10 +22,6 @@ pygame.event.wait()
 #munch sound effect when ram eats grass
 def munch():
     effect = pygame.mixer.Sound('munch.wav')
-    effect.play()
-
-def deathsound():
-    effect = pygame.mixer.Sound('deathsound.wav')
     effect.play()
 
 # Setting up ram.
@@ -48,8 +44,14 @@ def hardmode():
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     pygame.event.wait()
-    cowboyvel = 50
-    ramvel = 50
+    cowboyvel = 5
+    ramvel = 22
+    #screen.fill((0, 0, 0))
+    #screen.blit(hellimg, (hellx, helly))
+    #screen.blit(hellimg, 0, 0, 0, area=None, special_flags=0)
+    #pygame.surface.blit();
+
+
 
 def collision(rect1, rect2,):
     # Get the upper left coordinate of the first rectangle.
@@ -83,6 +85,13 @@ ranchy = 0
 ranchwidth = 1920
 ranchheight = 734
 
+# setting up hell.
+hellimg = pygame.image.load("hell.jpg")
+hellx = 0
+helly = 0
+hellwidth = 1920
+hellheight = 734
+
 # grass x,y and img
 grassx = 700
 grassy = 500
@@ -104,11 +113,11 @@ cowboyvel = 1
 # setting up grass that ram runs around and eats
 def spawngrass():
     global grassx, grassy
-    grassx = choice(range(1280))
-    grassy = choice(range(720))
+    grassx = choice(range(1000))
+    grassy = choice(range(600))
     if collision(((grassx, grassy, grasswidth, grassheight)), ((grassx, grassy, 230, 200))):
-        grassx = choice(range(1280))
-        grassy = choice(range(720))
+        grassx = choice(range(1000))
+        grassy = choice(range(600))
 
 
 
@@ -155,28 +164,37 @@ while run:
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
-        deathsound()
         break
+
 
     if collision(ramrect, grassrect):
         score += 1
         munch()
         grassx = choice(range(1000))
-        grassy = choice(range(700))
+        grassy = choice(range(600))
 
     if score == 10:
-        cowboyvel = 1.5
+        cowboyvel = 1.6
     if score == 20:
-        cowboyvel = 2.5
+        cowboyvel = 2.7
     if score == 30:
-        cowboyvel = 3.5
+        cowboyvel = 2.8
     if score == 40:
-        cowboyvel = 4.5
-    if score == 999:
-        score = 0
+        cowboyvel = 0.1
+    if score == 50:
+        score += 1
         hardmode()
-    if score == 999:
-        impossiblemode()
+    if score == 100:
+        cowboyvel = 5.5
+    if score == 150:
+        cowboyvel = 6
+
+
+
+
+
+
+
     text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
     # Render the scene.
     screen.fill((0, 0, 0))
