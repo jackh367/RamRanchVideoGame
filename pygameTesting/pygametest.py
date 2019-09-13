@@ -1,6 +1,5 @@
 # Import and initialize pygame module.
 import pygame
-# import webbrowser
 from random import choice
 pygame.init()
 pygame.font.init()
@@ -34,6 +33,10 @@ ramy = 425
 ramwidth = 40
 ramheight = 60
 ramvel = 13
+
+# Prints score to a text file, not implemented
+# scores = open("scores.txt")
+# scores.write("Your score that game was {}".format(score))
 
 # Hard Mode
 def hardmode():
@@ -167,10 +170,7 @@ while run:
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
         break
-        # Prints score to a text file, not implemented
-        #os.startfile('Scores.txt')
-        #File_object.write("Your score that game was:" + score)
-
+        scores()
 
     if collision(ramrect, grassrect):
         score += 1
