@@ -1,5 +1,6 @@
 # Import and initialize pygame module.
 import pygame
+# import webbrowser
 from random import choice
 pygame.init()
 pygame.font.init()
@@ -19,7 +20,7 @@ pygame.mixer.music.load(file)
 pygame.mixer.music.play()
 pygame.event.wait()
 
-#munch sound effect when ram eats grass
+# Sound effect
 def munch():
     effect = pygame.mixer.Sound('munch.wav')
     effect.play()
@@ -34,8 +35,7 @@ ramwidth = 40
 ramheight = 60
 ramvel = 13
 
-# this variable keeps track of the ram's grass eaten
-#sets up harder version of the game
+# Hard Mode
 def hardmode():
     global cowboyvel
     global ramvel
@@ -46,12 +46,14 @@ def hardmode():
     pygame.event.wait()
     cowboyvel = 5
     ramvel = 22
+
+    # Supposed to fill the screen with an alternative background. Not working as of yet
     #screen.fill((0, 0, 0))
     #screen.blit(hellimg, (hellx, helly))
     #screen.blit(hellimg, 0, 0, 0, area=None, special_flags=0)
     #pygame.surface.blit();
 
-
+    # Hitboxes
 
 def collision(rect1, rect2,):
     # Get the upper left coordinate of the first rectangle.
@@ -85,7 +87,7 @@ ranchy = 0
 ranchwidth = 1920
 ranchheight = 734
 
-# setting up hell.
+# Setting up an alternative version of the ranch. (For hard mode)
 hellimg = pygame.image.load("hell.jpg")
 hellx = 0
 helly = 0
@@ -110,7 +112,7 @@ cowboywidth = 180
 cowboyheight = 194
 cowboyvel = 1
 
-# setting up grass that ram runs around and eats
+# Setting up grass
 def spawngrass():
     global grassx, grassy
     grassx = choice(range(1000))
@@ -165,6 +167,9 @@ while run:
     ramrect = (ramx, ramy, ramwidth, ramheight)
     if collision(cowboyrect, ramrect):
         break
+        # Prints score to a text file, not implemented
+        #os.startfile('Scores.txt')
+        #File_object.write("Your score that game was:" + score)
 
 
     if collision(ramrect, grassrect):
@@ -180,7 +185,7 @@ while run:
     if score == 30:
         cowboyvel = 2.8
     if score == 40:
-        cowboyvel = 0.1
+        cowboyvel = 2.9
     if score == 50:
         score += 1
         hardmode()
@@ -188,6 +193,8 @@ while run:
         cowboyvel = 5.5
     if score == 150:
         cowboyvel = 6
+    if score == 200:
+        cowboyvel = 7
 
 
 
