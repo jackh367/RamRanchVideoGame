@@ -13,10 +13,10 @@ pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 60)
 text_surface = myfont.render('{}'.format(score), False, (255, 225, 255.))
 # Setting up sounds.
-file = 'Ram Ranch.mp3'
+file = 'Ram Ranch Alternative Music.mp3'
 pygame.mixer.init()
 pygame.mixer.music.load(file)
-pygame.mixer.music.play()
+pygame.mixer.music.play(loops=1)
 pygame.event.wait()
 
 # Sound effect
@@ -38,16 +38,40 @@ ramvel = 13
 # scores = open("scores.txt")
 # scores.write("Your score that game was {}".format(score))
 
-# Hard Mode
+
+#simply begins playing new song, nothing else
+def ramranch():
+    global cowboyvel
+    global ramvel
+    file = 'Ram Ranch.mp3'
+    pygame.mixer.init()
+    pygame.mixer.music.load(file)
+    pygame.mixer.music.play(loops=1)
+    pygame.event.wait()
+
+
+# Hard Mode: Reached once 100 points are attained
 def hardmode():
     global cowboyvel
     global ramvel
-    file = 'hardmodemusic.mp3'
+    file = 'hardmodemusicAlternative.mp3'
     pygame.mixer.init()
     pygame.mixer.music.load(file)
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(loops=1)
     pygame.event.wait()
-    cowboyvel = 5
+    cowboyvel = 4
+    ramvel = 13
+
+#Insane Mode: Reached once 200 points are attained
+def insanemode():
+    global cowboyvel
+    global ramvel
+    file = 'hardmodemusicAlternative.mp3'
+    pygame.mixer.init()
+    pygame.mixer.music.load(file)
+    pygame.mixer.music.play(loops=1)
+    pygame.event.wait()
+    cowboyvel = 8
     ramvel = 22
 
     # Supposed to fill the screen with an alternative background. Not working as of yet
@@ -90,20 +114,33 @@ ranchy = 0
 ranchwidth = 1920
 ranchheight = 734
 
-# Setting up an alternative version of the ranch. (For hard mode)
+# Setting up the ranch with an alternative sky (For hard mode.)
 hellimg = pygame.image.load("hell.jpg")
 hellx = 0
 helly = 0
 hellwidth = 1920
 hellheight = 734
 
-# grass x,y and img
+# Setting up the literal depths of hell. (For insane mode.)
+hellactualimg = pygame.image.load("hell.jpg")
+hellactualx = 0
+hellactualy = 0
+hellactualwidth = 1920
+hellactualheight = 734
+
+# Grass x,y and image.
 grassx = 700
 grassy = 500
 grassimg = pygame.image.load("grass.png")
 grasswidth = 200
 grassheight = 256
 
+# Soul X,Y and image.
+soulx = 700
+souly = 500
+soulimg = pygame.image.load("soul.png")
+soulwidth = 200
+soulheight = 256
 
 # setting up enemies
 cowboyleft = pygame.image.load("cowboyleft.png")
@@ -115,7 +152,7 @@ cowboywidth = 180
 cowboyheight = 194
 cowboyvel = 1
 
-# Setting up grass
+# Setting up grass.
 def spawngrass():
     global grassx, grassy
     grassx = choice(range(1000))
@@ -124,6 +161,14 @@ def spawngrass():
         grassx = choice(range(1000))
         grassy = choice(range(600))
 
+# Setting up souls. (Replaces grass in insane mode.)
+def spawnsoul():
+    global soulx, souly
+    soulx = choice(range(1000))
+    souly = choice(range(600))
+    if collision(((soulx, souly, grasswidth, grassheight)), ((soulx, souly, 230, 200))):
+        soulx = choice(range(1000))
+        souly = choice(range(600))
 
 
 # Start game loop.
@@ -168,6 +213,7 @@ while run:
     grassrect = (grassx, grassy, grasswidth, grassheight)
     cowboyrect = (cowboyx, cowboyy, cowboywidth, cowboyheight)
     ramrect = (ramx, ramy, ramwidth, ramheight)
+    soulrect = (soulx, souly, soulwidth, soulheight)
     if collision(cowboyrect, ramrect):
         break
         scores()
@@ -188,19 +234,15 @@ while run:
         cowboyvel = 2.9
     if score == 50:
         score += 1
-        hardmode()
+        ramranch()
     if score == 100:
-        cowboyvel = 5.5
+        score += 1
+        hardmode()
     if score == 150:
         cowboyvel = 6
     if score == 200:
-        cowboyvel = 7
-
-
-
-
-
-
+        score += 1
+        insanemode()
 
     text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
     # Render the scene.
@@ -211,6 +253,15 @@ while run:
     screen.blit(grassimg, (grassx, grassy))
     screen.blit(text_surface, (20,20))
     pygame.display.update()
+
+    #if hardmode(): True
+    #screen.Surface.blit(hellimg, (hellx, helly))
+#else:
+    #if insanemode(): True
+    #screen.Surface.blit(hellactualimg, (hellactualx, hellactualy))
+    #screen.Surface.blit(soulimg, (soulx, souly))
+
+
 
 
 pygame.quit()
