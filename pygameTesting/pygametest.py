@@ -36,7 +36,7 @@ ramx = 50
 ramy = 425
 ramwidth = 40
 ramheight = 60
-ramvel = 13
+ramvel = 15
 
 # this variable keeps track of the ram's grass eaten
 #sets up harder version of the game
@@ -99,7 +99,7 @@ cowboyx = 600
 cowboyy = 400
 cowboywidth = 180
 cowboyheight = 194
-cowboyvel = 1
+cowboyvel = 2
 
 # setting up grass that ram runs around and eats
 def spawngrass():
@@ -107,8 +107,8 @@ def spawngrass():
     grassx = choice(range(1280))
     grassy = choice(range(720))
     if collision(((grassx, grassy, grasswidth, grassheight)), ((grassx, grassy, 230, 200))):
-        grassx = choice(range(1280))
-        grassy = choice(range(720))
+        grassx = choice(range(1000))
+        grassy = choice(range(690))
 
 
 
@@ -165,18 +165,16 @@ while run:
         grassy = choice(range(700))
 
     if score == 10:
-        cowboyvel = 1.5
+        cowboyvel = 3
     if score == 20:
-        cowboyvel = 2.5
+        cowboyvel = 4
     if score == 30:
-        cowboyvel = 3.5
-    if score == 40:
         cowboyvel = 4.5
-    if score == 999:
+    if score == 40:
+        cowboyvel = 5
+    if score == 50:
         score = 0
         hardmode()
-    if score == 999:
-        impossiblemode()
     text_surface = myfont.render('{}'.format(score), False, (255, 255, 255.))
     # Render the scene.
     screen.fill((0, 0, 0))
