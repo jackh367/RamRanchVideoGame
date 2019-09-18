@@ -78,6 +78,23 @@
             <State>
               <option name="COLUMN_ORDER" />
             </State>
+<<<<<<< HEAD
+=======
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+>>>>>>> e8f8b434aee0aaf4a8f97ec6d1f08d4d5c159630
           </value>
         </entry>
       </map>
